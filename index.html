@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+		<link rel="stylesheet" href="./css/style.css"/>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+   		integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   		crossorigin=""/>
+   		<script src='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+		<link href='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+	<title>Vélo à A Rouen</title>
+</head>
+<body>
+
+
+<h1>Vel'ib</h1>
+<div id = "mapInfo">
+<div id = "mapid"></div> <!--affichage map-->
+<div id="infoStation"> <!-- Cadre informations sur la station sélectionnée -->
+
+                    <h1>Informations sur la station :</h1>
+
+                    <!-- Informations sur la station sélectionnée -->
+                    <ul id="listeInfo">
+                        <li>Nom : <span id="nomStation"> <!-- Nom inséré en Javascript --> </span></li>
+                        <li>Adresse : <span id="adresseStation"> <!-- Adresse insérer en Javascript --> </span></li>
+                        <li>Etat : <span id="etatStation"> <!-- État inséré en Javascript --> </span></li>
+                        <li>Vélos disponibles : <span id="veloDispo"> <!-- Nombre inséré en Javascript --> </span></li>
+                        <li>Points d'attache disponibles : <span id="attacheDispo"> <!-- Nombre inséré en Javascript --> </span></li>
+                    </ul>
+
+            <canvas id="canvasInAPerfectWorld" width="490" height="220"></canvas>
+            <div id="canvasDiv"></div>
+
+ </div>
+
+ </div>                   <!-- /Informations sur la station sélectionnée -->
+<!--<div id='map' style='width: 400px; height: 300px;'></div> -->
+
+		<img class="mySlides" src="./images/velo1.jpg">
+		<img class="mySlides" src="./images/velo2.jpg">
+		<img class="mySlides" src="./images/velo3.jpg">
+		<img class="mySlides" src="./images/velo4.jpg">
+
+		<button id="button_left" class="w3-button w3-display-left">&#10094;</button>
+		<button id="button_right" class="w3-button w3-display-right">&#10095;</button>
+
+
+
+
+		<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+   		integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+   		crossorigin=""></script>
+
+
+	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="./javascript/slider/slider obj.js"></script>
+	<script type="text/javascript" src="./javascript/ajax/ajax.js"></script>
+	<script type="text/javascript" src="./javascript/leaflet.js"></script>
+	<script type="text/javascript" src="./javascript/canvas.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+#mapid 
+{ 
+	height : 800px;
+	width: 100%;
+	
+
+}
+
+#infoStation
+{
+display : none;
+width: 29%;
+margin-left:1%;
+
+}
+
+#infoStation li
+{
+	list-style: none;
+	padding: 15px;
+	font-style: bold;
+}
+
+#mapInfo
+{
+	display : flex;
+}
+
+canvas 
+{
+	border : 1px solid black;
+}
