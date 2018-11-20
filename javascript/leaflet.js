@@ -67,12 +67,13 @@ ajaxGet(urlapi, function (reponse) {
 		};
 
 marker.on('click', displayPanel);
+});
 
 //Création d'un décompte
 var cpt = 10 ;
 var x ;
  
-function decompte()
+function decompte(cpt)
 {
     if(cpt>=0)
     {
@@ -98,7 +99,8 @@ function decompte()
    var btnValid = $('#validationCanvas');
         afficheInfo = function(){
         $("#selectionStation").show();
-        $("#selectionStation").html("Vous avez séléctionné la station "+ station.name + " réservation valide pendant : " + decompte(1000));
+        //$("#selectionStation").html("Vous avez séléctionné la station "+ $("#nomStation").text() + " réservation valide pendant : ");
+        decompte(1000);
         };
 
       btnValid.on('click',afficheInfo);
@@ -108,4 +110,3 @@ function decompte()
 
  
 
-});
