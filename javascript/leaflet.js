@@ -67,7 +67,45 @@ ajaxGet(urlapi, function (reponse) {
 		};
 
 marker.on('click', displayPanel);
+
+//Création d'un décompte
+var cpt = 10 ;
+var x ;
+ 
+function decompte()
+{
+    if(cpt>=0)
+    {
+        if(cpt>1)
+        {
+            var sec = " secondes.";
+        } else {
+            var sec = " seconde.";
+        }
+        $("#timer").html = "Redirection dans " + cpt + sec ;
+        cpt-- ;
+        x = setTimeout(decompte(),1000) ;
+    }
+    else
+    {
+        clearTimeout(x) ;
+    }
+
+};
+
+
+
+   var btnValid = $('#validationCanvas');
+        afficheInfo = function(){
+        $("#selectionStation").show();
+        $("#selectionStation").html("Vous avez séléctionné la station "+ station.name + " réservation valide pendant : " + decompte(1000));
+        };
+
+      btnValid.on('click',afficheInfo);
     });
 
+
+
+ 
 
 });
