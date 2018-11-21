@@ -1,11 +1,11 @@
 var canvasObj = {
-	
-	//propriétés obj canvasObj
 
-	canvasWidth : "490px",
-	canvasHeight : "220px",
-	canvasDiv : document.getElementById('canvasDiv'),
-	canvas : document.createElement('canvas'),
+	//propriétés
+
+	canvasWidth : "490px", //définition largeur
+	canvasHeight : "220px", //définition hauteur canvas
+	canvasDiv : document.getElementById('canvasDiv'), //Récupération de l'élément "canvasDiv" dans la variable
+	canvas : document.createElement('canvas'), //création d'un élement canvas dans le document
 	clickX : new Array(),
 	clickY : new Array(),
 	clickDrag : new Array(),
@@ -15,23 +15,23 @@ var canvasObj = {
 //Méthode de l'objet
 
 
-	addClick : function(x, y, dragging)
+	addClick : function(x, y, dragging) //Fonction gérant les clique sur axe x et y + click & drag
 	{
-		this.clickX.push(x);
+		  this.clickX.push(x);
   		this.clickY.push(y);
   		this.clickDrag.push(dragging);
 	},
 
 
-	redraw : function()
+	redraw : function() // gestion du style de trait
 	{
 		this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height); // Clears the canvas
 
-  		this.context.strokeStyle = "#df4b26";
-  		this.context.lineJoin = "round";
-  		this.context.lineWidth = 5;
+  		this.context.strokeStyle = "#000000"; //couleur
+  		this.context.lineJoin = "round"; // "style du trait"
+  		this.context.lineWidth = 5; // épaisseur du trait
 
-  
+
   		for(var i=0; i < this.clickX.length; i++) {
    			this.context.beginPath();
 		    if(this.clickDrag[i] && i){
@@ -58,6 +58,7 @@ if(typeof G_vmlCanvasManager != 'undefined') {
   canvas = G_vmlCanvasManager.initElement(canvas);
 }
 
+//gestion de l'évènement mousdown (clique de souris)
 $('#canvas').mousedown(function(e){
   var mouseX = e.pageX - this.offsetLeft;
   var mouseY = e.pageY - this.offsetTop;
