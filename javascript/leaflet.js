@@ -36,7 +36,7 @@ ajaxGet(urlapi, function (reponse) {
 //Insertion des markers sur la carte
     stations.forEach(function (station) {
           //Méthode pour mise en forme des noms des stations
-         
+
             var tableau_name = station.name.split("-");
           	var station_name = tableau_name[1] ;
 
@@ -53,12 +53,12 @@ ajaxGet(urlapi, function (reponse) {
         else {
         var marker =L.marker([station.position.lat, station.position.lng], {icon: redIcon}).addTo(mymap);
         };
-  		
+
   		//Méthode d'insertion des informations dans div infoStation
 
 		displayPanel = function(){
 		$("#mapid").width("70%");
-		$("#infoStation").show();	
+		$("#infoStation").show();
 		$("#nomStation").html(station.name);
 		$("#etatStation").html(station.status);
 		$("#veloDispo").html(station.available_bikes);
@@ -68,32 +68,6 @@ ajaxGet(urlapi, function (reponse) {
 
 marker.on('click', displayPanel);
 });
-
-//Création d'un décompte
-var cpt = 10 ;
-var x ;
- 
-function decompte(cpt)
-{
-    if(cpt>=0)
-    {
-        if(cpt>1)
-        {
-            var sec = " secondes.";
-        } else {
-            var sec = " seconde.";
-        }
-        $("#timer").html = "Redirection dans " + cpt + sec ;
-        cpt-- ;
-        x = setTimeout(decompte(),1000) ;
-    }
-    else
-    {
-        clearTimeout(x) ;
-    }
-
-};
-
 
 
    var btnValid = $('#validationCanvas');
@@ -108,5 +82,5 @@ function decompte(cpt)
 
 
 
- 
+
 
