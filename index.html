@@ -22,7 +22,7 @@
 <div id = "mapid"></div> <!--affichage map-->
 <div id="infoStation"> <!-- Cadre informations sur la station sélectionnée -->
 
-                    <h1>Informations sur la station :</h1>
+                    <h2>Informations sur la station :</h2>
 
                     <!-- Informations sur la station sélectionnée -->
                     <ul id="listeInfo">
@@ -33,36 +33,35 @@
                         <li>Points d'attache disponibles : <span id="attacheDispo"> <!-- Nombre inséré en Javascript --> </span></li>
                     </ul>
             <div id="canvasDiv"></div>
-<p class="demoToolList">Clear the canvas: <button id="clearCanvasSimple" type="button">Clear</button></p>
-<button id ="validationCanvas" type ="button">Valider</button>
+<p class="demoToolList"><button id="clearCanvasSimple" type="button">Annuler</button></p>
+<button onclick="startTimer()">Valider</button>
  </div>
 
  </div>                   <!-- /Informations sur la station sélectionnée -->
-<!--<div id='map' style='width: 400px; height: 300px;'></div> -->
+
+
 <section id = "selectionStation"><div id="timer"></div></section>
 
+                    <!--Slider-->
 		<img class="mySlides" src="./images/velo1.jpg">
 		<img class="mySlides" src="./images/velo2.jpg">
 		<img class="mySlides" src="./images/velo3.jpg">
 		<img class="mySlides" src="./images/velo4.jpg">
-
+<!--Boutons du slider-->
 		<button id="button_left" class="w3-button w3-display-left">&#10094;</button>
 		<button id="button_right" class="w3-button w3-display-right">&#10095;</button>
+<!--/Boutons du slider-->
+                    <!--/Slider-->
 
-
-
-
-		<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
-   		integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
-   		crossorigin=""></script>
-
-
+                    <!--Script JS-->
+  <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="crossorigin=""></script>
 	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 	<script type="text/javascript" src="./javascript/slider/slider obj.js"></script>
 	<script type="text/javascript" src="./javascript/ajax/ajax.js"></script>
 	<script type="text/javascript" src="./javascript/leaflet.js"></script>
-	<script type="text/javascript" src="./javascript/canvas.js"></script>
+	<script type="text/javascript" src="./javascript/canvasobj.js"></script>
+  <script type="text/javascript" src="./javascript/countdownobj.js"></script>
 	<script type="text/javascript" src="./javascript/bootstrap.js"></script>
-
+                    <!--Script JS-->
 </body>
 </html>
