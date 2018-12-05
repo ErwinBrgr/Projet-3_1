@@ -18,11 +18,16 @@ ct : function(){
 		},
 };
 
-var x = $("#valid").on('click',setInterval(function(){
-	countDownObj.ct() //appel à la fonction ct à l'interieur de l'objet
-		 if (countDownObj.distance < 0) {
-	    clearInterval(x);
-	    document.getElementById("timer").innerHTML = "Réservation non valide"; //gestion en cas de session expiré
+var x = $('#valid').on('click', function(){
+			setInterval(function(){
+			countDownObj.ct(); //appel à la fonction ct à l'interieur de l'objet
+		 	if (countDownObj.distance < 0) {
+	    	clearInterval(x);
+	    	document.getElementById("timer").innerHTML = "Réservation non valide"; //gestion en cas de session expiré
 		}
-},1000));
+	},1000);
+});
+
+
+
 
