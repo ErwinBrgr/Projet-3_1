@@ -1,20 +1,18 @@
 var countDownObj  = {
-	//properties 
+	//properties
 countDownDate : new Date().getTime() + 20*60*1000, //date du jour + 20 minutes
 distance : 0, //initialisation de la propriété distance
-	
+
 	//methods
 
 ct : function(){
 
-
 		var now = new Date().getTime(); //date du jour
-		countDownObj.distance= countDownObj.countDownDate - now ; 
-		var minutes = Math.floor((countDownObj.distance % (1000 * 60 * 60)) / (1000 * 60)); 
+		countDownObj.distance= countDownObj.countDownDate - now ;
+		var minutes = Math.floor((countDownObj.distance % (1000 * 60 * 60)) / (1000 * 60));
 		var seconds = Math.floor((countDownObj.distance % (1000 * 60)) / 1000);
 		document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s "; //affichage minutes et secondes
 
-		
 		},
 };
 
@@ -27,7 +25,3 @@ var x = $('#valid').on('click', function(){
 		}
 	},1000);
 });
-
-
-
-
