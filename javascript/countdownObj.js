@@ -1,27 +1,55 @@
-var countDownObj  = {
+/* ------------------------------------------------------------------------------ */
+/* --            Compte à rebours et gestion des réservations    -- */
+/* ------------------------------------------------------------------------------ */
+
+
+
+var CountDownObj  = {
 	//properties
-countDownDate : new Date().getTime() + 20*60*1000, //date du jour + 20 minutes
-distance : 0, //initialisation de la propriété distance
+	countDownDate : 0, //EDIT : on créer la propriété qui a pour valeur nulle
+	distance : 0, //initialisation de la propriété distance
+	minutes : 0,
+	seconds: 0,
+	nomStation : stations.station.name,
+
 
 	//methods
 
-ct : function(){
+	//Méthode lancement d'une réservation
 
+	
+		
+
+
+	ct : function(){
+		sessionStorage.setItem("nomStation",CountDownObj.nomStation);
+		sessionStorage.setItem("minutes", CountDownObj.minutes);
+		sessionStorage.setItem("secondes", CountDownObj.seconds);			
+	
 		var now = new Date().getTime(); //date du jour
-		countDownObj.distance= countDownObj.countDownDate - now ;
-		var minutes = Math.floor((countDownObj.distance % (1000 * 60 * 60)) / (1000 * 60));
-		var seconds = Math.floor((countDownObj.distance % (1000 * 60)) / 1000);
-		document.getElementById("timer").innerHTML = minutes + "m " + seconds + "s "; //affichage minutes et secondes
+		CountDownObj.distance = CountDownObj.countDownDate  - now ;
+		CountDownObj.minutes = Math.floor((CountDownObj.distance % (1000 * 60 * 60)) / (1000 * 60));
+		CountDownObj.seconds = Math.floor((CountDownObj.distance % (1000 * 60)) / 1000);
+		document.getElementById("timer").innerHTML = CountDownObj.minutes + "m " + CountDownObj.seconds + "s "; //affichage minutes et secondes
+		CountDownObj.seconds = sessionStorage.getItem('seconds');
+		CountDownObj.minutes = sessionStorage.getItem('minutes');
+		console.log(CountDownObj.seconds)
+		if (CountDownObj.distance < 0) {
+            clearInterval(x);
+            sessionStorage.clear();
+            document.getElementById("timer").innerHTML = "Réservation non valide"; //gestion en cas de session expiré
+        }
 
-		},
+	},
+
+	timer : function(){
+		CountDownObj.countDownDate = new Date().getTime() + 20*60*1000; // EDIT : on initialise le compteur
+		x = setInterval(CountDownObj.ct,1000);
+		this.distance = sessionStorage.getItem("distance");
+	}	
 };
 
-var x = $('#valid').on('click', function(){
-			setInterval(function(){
-			countDownObj.ct(); //appel à la fonction ct à l'interieur de l'objet
-		 	if (countDownObj.distance < 0) {
-	    	clearInterval(x);
-	    	document.getElementById("timer").innerHTML = "Réservation non valide"; //gestion en cas de session expiré
-		}
-	},1000);
+
+$('#valid').on('click', function(){
+    CountDownObj.timer();
 });

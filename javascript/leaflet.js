@@ -76,7 +76,6 @@ marker.on('click', displayPanel); //gestion du click sur le marker pour affichag
         afficheInfo = function(){
         $("#selectionStation").show();
         //$("#selectionStation").html("Vous avez séléctionné la station "+ $("#nomStation").text() + " réservation valide pendant : ");
-        decompte(1000);
         };
 
       btnValid.on('click',afficheInfo); //trigger sur bouton valider pour déclangement des informations de la station
