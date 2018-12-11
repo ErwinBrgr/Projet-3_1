@@ -57,6 +57,9 @@ ajaxGet(urlapi, function (reponse) {
 
   		//Méthode d'insertion des informations dans div infoStation
 
+
+sessionStorage.setItem("nomStation", station.name);
+
 		displayPanel = function(){
 		$("#mapid").width("70%"); //changement de la largeur de carte pour 70% de la taille de la page
 		$("#infoStation").show(); //affichage div en display none par défault
@@ -68,18 +71,24 @@ ajaxGet(urlapi, function (reponse) {
 		};
 
 marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
-});
 
+        valid = function () {
+        $("#selectionStation").html("Réservation à la station "+ station.name + " temps restant : ")
+        CountDownObj.nomStation = sessionStorage.getItem("nomStation");
+        CountDownObj.distance = sessionStorage.getItem("distance");
 
-//gestion du clic sur le bouton "valider". Affiche une zone avec information sur la station et un countdown de 20 mins
-   var btnValid = $('#validationCanvas');
-        afficheInfo = function(){
-        $("#selectionStation").show();
-        //$("#selectionStation").html("Vous avez séléctionné la station "+ $("#nomStation").text() + " réservation valide pendant : ");
         };
 
-      btnValid.on('click',afficheInfo); //trigger sur bouton valider pour déclangement des informations de la station
+        $('#valid').on('click', function(){
+        valid() + CountDownObj.timer();
+    
+        });
+
     });
+
+
+
+});
 
 
 

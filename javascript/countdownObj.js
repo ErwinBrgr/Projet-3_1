@@ -7,10 +7,10 @@
 var CountDownObj  = {
 	//properties
 	countDownDate : 0, //EDIT : on créer la propriété qui a pour valeur nulle
-	distance : 0, //initialisation de la propriété distance
+	//distance : 0, //initialisation de la propriété distance
 	minutes : 0,
 	seconds: 0,
-	nomStation : stations.station.name,
+	//nomStation : null,
 
 
 	//methods
@@ -22,17 +22,17 @@ var CountDownObj  = {
 
 
 	ct : function(){
-		sessionStorage.setItem("nomStation",CountDownObj.nomStation);
-		sessionStorage.setItem("minutes", CountDownObj.minutes);
-		sessionStorage.setItem("secondes", CountDownObj.seconds);			
+		//sessionStorage.setItem("nomStation",CountDownObj.nomStation);
+		sessionStorage.setItem("distance", CountDownObj.distance);
+		//sessionStorage.setItem("secondes", CountDownObj.seconds);			
 	
 		var now = new Date().getTime(); //date du jour
 		CountDownObj.distance = CountDownObj.countDownDate  - now ;
 		CountDownObj.minutes = Math.floor((CountDownObj.distance % (1000 * 60 * 60)) / (1000 * 60));
 		CountDownObj.seconds = Math.floor((CountDownObj.distance % (1000 * 60)) / 1000);
 		document.getElementById("timer").innerHTML = CountDownObj.minutes + "m " + CountDownObj.seconds + "s "; //affichage minutes et secondes
-		CountDownObj.seconds = sessionStorage.getItem('seconds');
-		CountDownObj.minutes = sessionStorage.getItem('minutes');
+		//CountDownObj.seconds = sessionStorage.getItem('seconds');
+		
 		console.log(CountDownObj.seconds)
 		if (CountDownObj.distance < 0) {
             clearInterval(x);
@@ -45,11 +45,13 @@ var CountDownObj  = {
 	timer : function(){
 		CountDownObj.countDownDate = new Date().getTime() + 20*60*1000; // EDIT : on initialise le compteur
 		x = setInterval(CountDownObj.ct,1000);
-		this.distance = sessionStorage.getItem("distance");
+		
 	}	
 };
 
-
+/*
 $('#valid').on('click', function(){
     CountDownObj.timer();
-});
+    this.nomStation = sessionStorage.getItem("nomStation");
+    CountDownObj.minutes = sessionStorage.getItem('distance');
+});*/
