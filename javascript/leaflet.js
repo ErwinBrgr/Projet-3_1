@@ -57,40 +57,52 @@ ajaxGet(urlapi, function (reponse) {
 
   		//Méthode d'insertion des informations dans div infoStation
 
-
-sessionStorage.setItem("nomStation", station.name);
-
-		displayPanel = function(){
-		$("#mapid").width("70%"); //changement de la largeur de carte pour 70% de la taille de la page
-		$("#infoStation").show(); //affichage div en display none par défault
-		$("#nomStation").html(station.name); //affichage du nom de la station
-		$("#etatStation").html(station.status); //affichage statut open ou close de la station
-		$("#veloDispo").html(station.available_bikes); //affichage de nombre de de vélos disponible
-		$("#attacheDispo").html(station.available_bike_stands); //affichage du nombre d'attache dispo
-
-		};
-
-marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
-
-        valid = function () {
-        $("#selectionStation").html("Réservation à la station "+ station.name + " temps restant : ")
-        CountDownObj.nomStation = sessionStorage.getItem("nomStation");
-        CountDownObj.distance = sessionStorage.getItem("distance");
+        displayPanel = function(){
+        $("#mapid").width("70%"); //changement de la largeur de carte pour 70% de la taille de la page
+        $("#infoStation").show(); //affichage div en display none par défault
+        $("#nomStation").html(station.name); //affichage du nom de la station
+        $("#etatStation").html(station.status); //affichage statut open ou close de la station
+        $("#veloDispo").html(station.available_bikes); //affichage de nombre de de vélos disponible
+        $("#attacheDispo").html(station.available_bike_stands); //affichage du nombre d'attache dispo
 
         };
 
-        $('#valid').on('click', function(){
-        valid() + CountDownObj.timer();
-    
-        });
+marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
 
-    });
-
-
+    }); // Fin for Each
+//marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
 
 });
 
 
+//marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
 
+        valid = function () {
+        sessionStorage.setItem("nomStation", $("#nomStation").html());
+        $('#selectionStation').html("Réservation à la station " + sessionStorage.getItem("nomStation"))
 
+        };
 
+        $('#valid').on('click', function(){
+        valid();
+        CountDownObj.timer();
+    
+        });
+
+$(function() {
+    //On vérifie l'existence d'une variable de session
+    if(sessionStorage.getItem("nomStation") == null) {
+        console.log("Pas de résa")
+    } else {
+            console.log("il y a une résa " + sessionStorage.getItem("nomStation"));
+            $("#selesctionStation").html("<p>Réservation à la station " + sessionStorage.getItem("nomStation"));
+            console.log(sessionStorage.getItem("distance"));
+            CountDownObj.timer(sessionStorage.getItem("distance"));
+    }
+
+            $("#clearCanvasSimple").on('click', function(){
+                console.log(sessionStorage.getItem("nomStation"));
+                sessionStorage.clear();
+                console.log(sessionStorage.getItem("nomStation"));
+            })
+});

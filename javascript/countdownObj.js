@@ -42,8 +42,8 @@ var CountDownObj  = {
 
 	},
 
-	timer : function(){
-		CountDownObj.countDownDate = new Date().getTime() + 20*60*1000; // EDIT : on initialise le compteur
+	timer : function(distance = 1200000 ){
+		CountDownObj.countDownDate = new Date().getTime() + parseInt(distance); // EDIT : on initialise le compteur
 		x = setInterval(CountDownObj.ct,1000);
 		
 	}	
