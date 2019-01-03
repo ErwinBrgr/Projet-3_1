@@ -42,6 +42,8 @@ ajaxGet(urlapi, function (reponse) {
 
          //Choix des markers selons statuts des stations et nombres de vélos présents dans la station
 
+
+
             //condition pour couleur du marker. si nb vélo sup à 5 afichage du markeur en vert
         if (station.available_bikes >= 5) {
         var marker =L.marker([station.position.lat, station.position.lng], {icon: greenIcon}).addTo(mymap);
@@ -55,6 +57,8 @@ ajaxGet(urlapi, function (reponse) {
         var marker =L.marker([station.position.lat, station.position.lng], {icon: redIcon}).addTo(mymap);
         };
 
+
+
   		//Méthode d'insertion des informations dans div infoStation
 
         displayPanel = function(){
@@ -67,10 +71,13 @@ ajaxGet(urlapi, function (reponse) {
 
         };
 
+
+
 marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
 
     }); // Fin for Each
 //marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
+
 
 });
 
@@ -106,3 +113,19 @@ $(function() {
                 console.log(sessionStorage.getItem("nomStation"));
             })
 });
+
+$(window).load(function () {
+    $('#signUp').click(function(){
+       $('.hover_bkgr_fricc').show();
+    });
+    /*$('.hover_bkgr_fricc').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });*/
+    $('.popupCloseButton').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+});
+/*
+.trigger_popup_fricc
+'.hover_bkgr_fricc'
+*/

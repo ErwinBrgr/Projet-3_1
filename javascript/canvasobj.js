@@ -89,4 +89,9 @@ $('#clearCanvasSimple').mousedown(function(e)
     canvasObj.clickY = new Array();
     canvasObj.clickDrag = new Array();
     canvasObj.redraw();
+    document.getElementById('signUp').style.display = "none";
 });
+
+   $('#canvas').on('click', function(){
+        document.getElementById('signUp').style.display = "block";
+        });
