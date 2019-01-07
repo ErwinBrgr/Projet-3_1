@@ -1,5 +1,16 @@
 var mymap = L.map('mapid').setView([49.443232, 1.099971], 15); // stockage carte dans div avec gestion de la position dans la ville de Rouen
 
+var stamenToner = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
+    attribution: 'Map tiles by Stamen Design, CC BY 3.0 — Map data © OpenStreetMap',
+    subdomains: 'abcd',
+    minZoom: 0,
+    maxZoom: 20,
+    ext: 'png'
+});
+
+mymap.addLayer(stamenToner);
+
+
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
@@ -32,6 +43,7 @@ ajaxGet(urlapi, function (reponse) {
     return new L.Icon(options);
 };
 
+var markers = new L.MarkerClusterGroup();
 
 //Insertion des markers sur la carte
     stations.forEach(function (station) {
@@ -57,7 +69,12 @@ ajaxGet(urlapi, function (reponse) {
         var marker =L.marker([station.position.lat, station.position.lng], {icon: redIcon}).addTo(mymap);
         };
 
+        
+        
+        markers.addLayer(marker);
+// add more markers here...
 
+        
 
   		//Méthode d'insertion des informations dans div infoStation
 
@@ -78,7 +95,7 @@ marker.on('click', displayPanel); //gestion du click sur le marker pour affichag
     }); // Fin for Each
 //marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
 
-
+mymap.addLayer(markers);
 });
 
 
