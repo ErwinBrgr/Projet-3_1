@@ -1,6 +1,6 @@
 //var articlesElt = document.getElementById("articles");
 var token = "43ca35bbc25b63d176479f8846a2026bb7f0175f";
-var urlapi = "https://api.jcdecaux.com/vls/v1/stations?contract=Rouen&apiKey="+token ;
+var urlapi = "https://api.jcdecaux.com/vls/v1/stations?contract=Marseille&apiKey="+token ;
 
 ajaxGet(urlapi, function (reponse) {
     // Transforme la réponse en un tableau d'articles
