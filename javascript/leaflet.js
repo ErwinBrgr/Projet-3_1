@@ -1,5 +1,5 @@
 var mymap = L.map('mapid').setView([43.300000, 5.400000], 15); // stockage carte dans div avec gestion de la position dans la ville de Rouen
-
+/*
 var stamenToner = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
     attribution: 'Map tiles by Stamen Design, CC BY 3.0 — Map data © OpenStreetMap',
     subdomains: 'abcd',
@@ -8,15 +8,15 @@ var stamenToner = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z
     ext: 'png'
 });
 
-mymap.addLayer(stamenToner);
+mymap.addLayer(stamenToner);*/
 
-/*
+
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoiZXJ3aW5icmdyIiwiYSI6ImNqbnQ1czl6cTBvYWEzcHBqOXBkMDB2bzcifQ.YfJ2wPJux8VPSoLBbXMgLA'
-}).addTo(mymap);*/
+}).addTo(mymap);
 
 var token = "43ca35bbc25b63d176479f8846a2026bb7f0175f";
 var urlapi = "https://api.jcdecaux.com/vls/v1/stations?contract=Marseille&apiKey="+token ;
@@ -45,16 +45,7 @@ ajaxGet(urlapi, function (reponse) {
 
 var markers = new L.MarkerClusterGroup();
 
-var markersClusterCustomPlus = new L.MarkerClusterGroup({
-    iconCreateFunction: function(cluster) {
-        var digits = (cluster.getChildCount()+'').length;
-        return L.divIcon({ 
-            html: cluster.getChildCount(), 
-            className: 'cluster digits-'+digits,
-            iconSize: null 
-        });
-    }
-});
+
 
 //Insertion des markers sur la carte
     stations.forEach(function (station) {
@@ -69,23 +60,23 @@ var markersClusterCustomPlus = new L.MarkerClusterGroup({
 
             //condition pour couleur du marker. si nb vélo sup à 5 afichage du markeur en vert
         if (station.available_bikes >= 5) {
-        var marker =L.marker([station.position.lat, station.position.lng], {icon: greenIcon}).addTo(mymap);
+        var marker =L.marker([station.position.lat, station.position.lng], {icon: greenIcon});
          }//idement mais affichage en orange
         else if(station.status = "OPEN" && station.available_bikes <= 4 ) {
-        var marker =L.marker([station.position.lat, station.position.lng], {icon: orangeIcon}).addTo(mymap);
+        var marker =L.marker([station.position.lat, station.position.lng], {icon: orangeIcon});
         }else if (station.available_bikes === 0) { //si 0 marker eu rouge
-        var marker =L.marker([station.position.lat, station.position.lng], {icon: redIcon}).addTo(mymap);
+        var marker =L.marker([station.position.lat, station.position.lng], {icon: redIcon});
         }
         else { //si aucune conditon remplie : rouge
-        var marker =L.marker([station.position.lat, station.position.lng], {icon: redIcon}).addTo(mymap);
+        var marker =L.marker([station.position.lat, station.position.lng], {icon: redIcon});
         };
 
-        
-        
+
+
         markers.addLayer(marker);
 // add more markers here...
 
-        
+
 
   		//Méthode d'insertion des informations dans div infoStation
 
@@ -111,27 +102,22 @@ mymap.addLayer(markers);
 
 
 //marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
-        getform = function(){
-            var nom = document.getElementById("Formnnom");
-            var prenom = document.getElementById("Formprenom");
-            console.log(getform);
-        };
-console.log(getform);
 
         valid = function () {
         //sessionStorage.setItem("nomStation", $("#nomStation").html());
         //sessionStorage.setItem("Formnom", $("#Formnom").html());
-        sessionStorage.setItem("Formprenom", $("#Formprenom").html());
-        $('#selectionStation').html("Réservation à la station " + sessionStorage.getItem("nomStation") + " pour " + sessionStorage.getItem("Formprenom") + " " + sessionStorage.getItem("Formnom"))
+        //sessionStorage.setItem("Formprenom", $("#Formprenom").html());
+         sessionStorage.setItem("nomStation", $("#nomStation").html());
+        $('#selectionStation').html("Réservation à la station " + sessionStorage.getItem("nomStation"))
 
         };
 
         $('#valid').on('click', function(){
         valid();
         CountDownObj.timer();
-    
-        });
 
+        });
+/*
 $(function() {
     //On vérifie l'existence d'une variable de session
     if(sessionStorage.getItem("nomStation") == null) {
@@ -148,7 +134,7 @@ $(function() {
                 sessionStorage.clear();
                 console.log(sessionStorage.getItem("nomStation"));
             })
-});
+});*/
 
 $(window).load(function () {
     $('#signUp').click(function(){
@@ -160,7 +146,7 @@ $(window).load(function () {
 
     $('#valid').click(function(){
         $('.hover_bkgr_fricc').html('<p>Réservation prise en compte !</p>');
-        $('.hover_bkgr_fricc').fadeOut( 4000, function() {
+        $('.hover_bkgr_fricc').fadeOut(3000, function() {
     // Animation complete.
         });
     });
