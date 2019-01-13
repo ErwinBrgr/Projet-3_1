@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="./css/style.css"/>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"/>
+   	<script src='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+		<link href='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+
+	<title>LeVélo - Marseille</title>
+</head>
+<body>
+
+<blockquote class="blockquote text-center">
+<h1>
+	LeVélo
+	<small class="text-muted"> location de vélo à Marseille</small>
+</h1>
+</blockquote>
+<!--navbar-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Levélo - Marseille</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">xxxxxx</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Présentation
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+                    <!--Slider-->
+		<img class="mySlides" src="./images/velo1.jpg">
+		<img class="mySlides" src="./images/velo2.jpg">
+		<img class="mySlides" src="./images/velo3.jpg">
+		<img class="mySlides" src="./images/velo4.jpg">
+<!--Boutons du slider-->
+
+		<button type="button" id="button_left" class="btn btn-primary btn-sm"><</button>
+		<button type="button" id="button_right" class="btn btn-primary btn-sm">></button>
+
+  </ul>
+</nav>
+<!--/Boutons du slider-->
+                    <!--/Slider-->
+<div id = "mapInfo">
+<div id = "mapid"></div> <!--affichage map-->
+<div id="infoStation"> <!-- Cadre informations sur la station sélectionnée -->
+
+                    <h2>Informations sur la station :</h2>
+
+                    <!-- Informations sur la station sélectionnée -->
+                    <ul id="listeInfo">
+                        <li>Nom : <span id="nomStation"> <!-- Nom inséré en Javascript --> </span></li>
+                        <li>Adresse : <span id="adresseStation"> <!-- Adresse insérer en Javascript --> </span></li>
+                        <li>Etat : <span id="etatStation"> <!-- État inséré en Javascript --> </span></li>
+                        <li>Vélos disponibles : <span id="veloDispo"> <!-- Nombre inséré en Javascript --> </span></li>
+                        <li>Points d'attache disponibles : <span id="attacheDispo"> <!-- Nombre inséré en Javascript --> </span></li>
+                    </ul>
+            <div id="canvasDiv"></div>
+<p class="demoToolList"><button type="button" id="clearCanvasSimple" class="btn btn-outline-primary">Annuler</button></p>
+
+
+<button type="button" id = "signUp" class="btn btn-primary">Inscription</button>
+ </div>
+
+ </div>                   <!-- /Informations sur la station sélectionnée -->
+
+
+<!--POP UP-->
+<a class="trigger_popup_fricc"></a>
+
+<div class="hover_bkgr_fricc">
+    <span class="helper"></span>
+    <div id = "formulaire">
+        <div class="popupCloseButton">X</div>
+        	<h3>Inscription</h3>
+        	<form method="get">
+   			<p id ="Formnom">Nom <input type="text" name="Nom"/></p>
+   			<p id ="Formprenom">Prénom <input type="text" name="Prenom"/></p>
+   			<p>Date de naissance <input type="date" name="naissance" /></p>
+   			<p>adresse email <input type="email" name="user_email" /></p>
+   			<button type="button" id ="valid" class="btn btn-primary">Valider</button>
+			</form>
+    </div>
+</div>
+<!--/POPUP-->
+
+
+
+
+<footer>
+<section id = "selectionStation"></section> <div id="timer"></div>
+<p> Ville de Marseille - Tous droits réservés </p>
+</footer>
+
+
+                    <!--Script JS-->
+
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script type="text/javascript" src="./javascript/slider/slider obj.js"></script>
+	<script type="text/javascript" src="./javascript/ajax/ajax.js"></script>
+	<script type="text/javascript" src="./javascript/leaflet.js"></script>
+	<script type="text/javascript" src="./javascript/canvasobj.js"></script>
+  <script type="text/javascript" src="./javascript/countdownObj.js"></script>
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+                    <!--Script JS-->
+</body>
+</html>
