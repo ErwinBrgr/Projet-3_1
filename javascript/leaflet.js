@@ -1,15 +1,4 @@
 var mymap = L.map('mapid').setView([43.300000, 5.400000], 15); // stockage carte dans div avec gestion de la position dans la ville de Rouen
-/*
-var stamenToner = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
-    attribution: 'Map tiles by Stamen Design, CC BY 3.0 — Map data © OpenStreetMap',
-    subdomains: 'abcd',
-    minZoom: 0,
-    maxZoom: 20,
-    ext: 'png'
-});
-
-mymap.addLayer(stamenToner);*/
-
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -35,15 +24,15 @@ ajaxGet(urlapi, function (reponse) {
     }
 });
  //création de variables pour stackage des 3 différentes icônes (verte, orange, rouge)
-    var greenIcon = new LeafIcon({iconUrl: './images/marker_green.png'}),
-    redIcon = new LeafIcon({iconUrl: './images/marker_red.png'}),
-    orangeIcon = new LeafIcon({iconUrl: './images/marker_orange.png'});
+    var greenIcon = new LeafIcon({iconUrl: './images/green_icon.png'}),
+    redIcon = new LeafIcon({iconUrl: './images/red_icon.png'}),
+    orangeIcon = new LeafIcon({iconUrl: './images/orange_icon.png'});
 
     L.icon = function (options) {
     return new L.Icon(options);
 };
 
-var markers = new L.MarkerClusterGroup();
+    var markers = new L.MarkerClusterGroup();
 
 
 
@@ -95,33 +84,31 @@ var markers = new L.MarkerClusterGroup();
 marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
 
     }); // Fin for Each
-//marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
 
 mymap.addLayer(markers);
 });
 
-
-//marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
-
-        valid = function () {
-        //sessionStorage.setItem("nomStation", $("#nomStation").html());
-        //sessionStorage.setItem("Formnom", $("#Formnom").html());
-        //sessionStorage.setItem("Formprenom", $("#Formprenom").html());
-         sessionStorage.setItem("nomStation", $("#nomStation").html());
-        $('#selectionStation').html("Réservation à la station " + sessionStorage.getItem("nomStation"))
+        valid = function (name) {
+        sessionStorage.setItem("nomStation", $("#nomStation").html());
+        sessionStorage.setItem("Formprenom", $("#Formprenom").val());
+        sessionStorage.setItem("Formnom", $("#Formnom").val());
+        
+            var name = $("#Formnom").val();
+            var missPrenom = document.getElementById("missPrenom");
+            if(name.trim(name) === ''){
+                missPrenom.textContent = "Prénom manquant";
+                missPrenom.style.color ='red';
+            }else{
+                 $('#selectionStation').html("Réservation à la station " + sessionStorage.getItem("nomStation") + " pour " + sessionStorage.getItem("Formprenom") +
+             " " + sessionStorage.getItem("Formnom"));
+            }
 
         };
 
-        $('#valid').on('click', function(){
-        valid();
-        CountDownObj.timer();
-
-        });
-/*
 $(function() {
     //On vérifie l'existence d'une variable de session
     if(sessionStorage.getItem("nomStation") == null) {
-        console.log("Pas de résa")
+        console.log("Pas de résa");
     } else {
             console.log("il y a une résa " + sessionStorage.getItem("nomStation"));
             $("#selesctionStation").html("<p>Réservation à la station " + sessionStorage.getItem("nomStation"));
@@ -133,18 +120,15 @@ $(function() {
                 console.log(sessionStorage.getItem("nomStation"));
                 sessionStorage.clear();
                 console.log(sessionStorage.getItem("nomStation"));
-            })
-});*/
+            });
 
-$(window).load(function () {
-    $('#signUp').click(function(){
+  $('#signUp').click(function(){
        $('.hover_bkgr_fricc').show();
     });
-    /*$('.hover_bkgr_fricc').click(function(){
-        $('.hover_bkgr_fricc').hide();
-    });*/
-
+   
     $('#valid').click(function(){
+        valid();
+        CountDownObj.timer();
         $('.hover_bkgr_fricc').html('<p>Réservation prise en compte !</p>');
         $('.hover_bkgr_fricc').fadeOut(3000, function() {
     // Animation complete.
@@ -154,4 +138,5 @@ $(window).load(function () {
     $('.popupCloseButton').click(function(){
         $('.hover_bkgr_fricc').hide();
     });
+
 });
