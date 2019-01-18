@@ -88,19 +88,25 @@ marker.on('click', displayPanel); //gestion du click sur le marker pour affichag
 mymap.addLayer(markers);
 });
 
-        valid = function (name) {
-        sessionStorage.setItem("nomStation", $("#nomStation").html());
-        sessionStorage.setItem("Formprenom", $("#Formprenom").val());
-        sessionStorage.setItem("Formnom", $("#Formnom").val());
+        valid = function () {
+            sessionStorage.setItem("nomStation", $("#nomStation").html());
         
             var name = $("#Formnom").val();
             var missPrenom = document.getElementById("missPrenom");
-            if(name.trim(name) === ''){
+            if($.trim(name) === ''){
                 missPrenom.textContent = "Prénom manquant";
                 missPrenom.style.color ='red';
+
+                return false;
             }else{
-                 $('#selectionStation').html("Réservation à la station " + sessionStorage.getItem("nomStation") + " pour " + sessionStorage.getItem("Formprenom") +
-             " " + sessionStorage.getItem("Formnom"));
+                sessionStorage.setItem("Formprenom", $("#Formprenom").val());
+                sessionStorage.setItem("Formnom", $("#Formnom").val());
+                 $('#selectionStation').html("Réservation à la station " 
+                + sessionStorage.getItem("nomStation") + " pour " + sessionStorage.getItem("Formprenom") 
+                +" " 
+                + sessionStorage.getItem("Formnom"));
+
+                 return true;
             }
 
         };
@@ -108,11 +114,14 @@ mymap.addLayer(markers);
 $(function() {
     //On vérifie l'existence d'une variable de session
     if(sessionStorage.getItem("nomStation") == null) {
-        console.log("Pas de résa");
+        //console.log("Pas de résa");
     } else {
-            console.log("il y a une résa " + sessionStorage.getItem("nomStation"));
-            $("#selesctionStation").html("<p>Réservation à la station " + sessionStorage.getItem("nomStation"));
-            console.log(sessionStorage.getItem("distance"));
+            //console.log("il y a une résa " + sessionStorage.getItem("nomStation"));
+            $("#selesctionStation").html("<p>Réservation à la station</p> " + sessionStorage.getItem("nomStation")
+                +" pour " + sessionStorage.getItem("Formprenom") 
+                +" " 
+                + sessionStorage.getItem("Formnom"));
+            //console.log(sessionStorage.getItem("distance"));
             CountDownObj.timer(sessionStorage.getItem("distance"));
     }
 
@@ -127,12 +136,17 @@ $(function() {
     });
    
     $('#valid').click(function(){
-        valid();
-        CountDownObj.timer();
-        $('.hover_bkgr_fricc').html('<p>Réservation prise en compte !</p>');
-        $('.hover_bkgr_fricc').fadeOut(3000, function() {
-    // Animation complete.
-        });
+       
+       if( valid() ){
+            CountDownObj.timer();
+            $('.hover_bkgr_fricc').html('<p>Réservation prise en compte !</p>');
+            $('.hover_bkgr_fricc').fadeOut(3000, function() {
+            // Animation complete.
+            });
+
+       }
+        
+       
     });
 
     $('.popupCloseButton').click(function(){
