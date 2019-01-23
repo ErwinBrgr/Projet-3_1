@@ -42,7 +42,7 @@ var canvasObj = {
 		     this.context.lineTo(this.clickX[i], this.clickY[i]);
 		     this.context.closePath();
 		     this.context.stroke();
-  		};
+  		}
 
 	},
 

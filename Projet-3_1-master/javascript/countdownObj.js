@@ -33,7 +33,7 @@ var CountDownObj  = {
 		document.getElementById("timer").innerHTML = CountDownObj.minutes + "m " + CountDownObj.seconds + "s "; //affichage minutes et secondes
 		//CountDownObj.seconds = sessionStorage.getItem('seconds');
 		
-		console.log(CountDownObj.seconds)
+		//console.log(CountDownObj.seconds)
 		if (CountDownObj.distance < 0) {
             clearInterval(x);
             sessionStorage.clear();
