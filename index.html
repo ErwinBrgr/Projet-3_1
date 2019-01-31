@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" media="screen and (max-width: 480px)" href="./css/phone.css"/>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"/>
@@ -15,62 +16,55 @@
 	<title>LeVélo - Marseille</title>
 </head>
 
-  <body>
+<body>
 
 <blockquote class="blockquote text-center">
   <h1>
 	 LeVélo
-	 <small class="text-muted"> location de vélo à Marseille</small>
+	 <small class="text-muted"> - Marseille</small>
   </h1>
 </blockquote>
 
-<!--navbar-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Levélo - Marseille</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<!--NAVBAR-->
+  
+  <!-- Navbar content -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
-
-<!--NAVBAR-->
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">xxxxxx</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Présentation
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="navbar-text" tabindex="-1"><div ="decompteTimerBar"></div></a>
+    </div>
   </div>
 </nav>
+  
 <!--/NAVBAR-->
 
                     <!--Slider-->
-		<img class="mySlides" src="./images/velo1.jpg">
-		<img class="mySlides" src="./images/velo2.jpg">
-		<img class="mySlides" src="./images/velo3.jpg">
-		<img class="mySlides" src="./images/velo4.jpg">
-<!--Boutons du slider-->
 
-		<button type="button" id="button_left" class="btn btn-primary btn-sm"><</button>
-		<button type="button" id="button_right" class="btn btn-primary btn-sm">></button>
+<div span ="slider">
+  <a div ="explicationResa" class="trigger_popup_slider">Comment réserver ?</a>
+  <div class="hover_bkgr_slider">
+    <span class="helper_slider"></span>
+    <div>
+        <div class="popupCloseButton_slider">X</div>
+            <img class="mySlides" src="./images/velo1.jpg">
+            <img class="mySlides" src="./images/velo2.jpg">
+            <img class="mySlides" src="./images/velo3.jpg">
+            <img class="mySlides" src="./images/velo4.jpg">
+            <!--Boutons du slider-->
+            <button type="button" id="button_left" class="btn btn-primary btn-sm"><</button>
+            <button type="button" id="button_right" class="btn btn-primary btn-sm">></button>
+            
+    </div>
+  </div>
+</div>
+
 
   </ul>
 </nav>
@@ -110,30 +104,46 @@
         	<h3>Inscription</h3>
         	<form method="get">
    			<p>Nom <input type="text" name="Nom" id ="Formnom"/></p>
+        <span id="missNom"></span><br>
    			<p>Prénom <input type="text" name="Prenom" id ="Formprenom"/></p>
         <span id="missPrenom"></span><br>
-   			<p>adresse email <input type="email" name="user_email" /></p>
    			<button type="button" id ="valid" class="btn btn-primary">Valider</button>
 			</form>
     </div>
 </div>
 <!--/POPUP-->
 
+<section class ="fctIcons">
+  <img class="icon" src="./images/green_icon.png"> 
+  <img class="icon" src="./images/orange_icon.png"> 
+  <img class="icon" src="./images/red_icon.png">
+</section>
 
-
+<section class = "comment_icons">
+  <p class = "cmt">vélos disponibles</p>
+  <p class ="cmt">Reste moins de x vélos</p>
+  <p class ="cmt">velos indisponibles ou station fermée</p>
+</section>
 
 <footer>
   <section id = "selectionStation"></section> <div id="timer"></div>
-  <p> Ville de Marseille - Tous droits réservés </p>
+  
+  <div id ="nous_suivre">
+    <h3>Nous suivre</h3>
+    <img src="https://img.icons8.com/color/50/000000/twitter.png">
+    <img src="https://img.icons8.com/color/48/000000/facebook.png">
+    <img src="https://img.icons8.com/color/48/000000/instagram-new.png">
+  </div>
+<p> Ville de Marseille - Tous droits réservés </p>
 </footer>
 
-
-                    <!--Script JS-->
+          
+    <!--Script JS-->
 
   <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
   <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 	<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
-	<script type="text/javascript" src="./javascript/slider/slider obj.js"></script>
+	<script type="text/javascript" src="./javascript/slider/slider_obj.js"></script>
 	<script type="text/javascript" src="./javascript/ajax/ajax.js"></script>
 	<script type="text/javascript" src="./javascript/leaflet.js"></script>
 	<script type="text/javascript" src="./javascript/canvasobj.js"></script>
@@ -144,5 +154,6 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
                     <!--Script JS-->
-  </body>
+  
+</body>
 </html>

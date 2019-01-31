@@ -1,4 +1,4 @@
-var mymap = L.map('mapid').setView([43.300000, 5.400000], 15); // stockage carte dans div avec gestion de la position dans la ville de Rouen
+var mymap = L.map('mapid').setView([43.275070, 5.379264], 13); // stockage carte dans div avec gestion de la position dans la ville de Rouen
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -42,7 +42,7 @@ ajaxGet(urlapi, function (reponse) {
 
             var tableau_name = station.name.split("-"); //
           	var station_name = tableau_name[1] ;
-
+          	var station_status = "Fermée";
          //Choix des markers selons statuts des stations et nombres de vélos présents dans la station
 
 
@@ -50,10 +50,10 @@ ajaxGet(urlapi, function (reponse) {
             //condition pour couleur du marker. si nb vélo sup à 5 afichage du markeur en vert
         if (station.available_bikes >= 5) {
         var marker =L.marker([station.position.lat, station.position.lng], {icon: greenIcon});
-         }//idement mais affichage en orange
+        station_status = "Ouvert"} //idement mais affichage en orange
         else if(station.status = "OPEN" && station.available_bikes <= 4 ) {
         var marker =L.marker([station.position.lat, station.position.lng], {icon: orangeIcon});
-        }else if (station.available_bikes === 0) { //si 0 marker eu rouge
+        station_status = "Ouvert"}else if (station.available_bikes === 0) { //si 0 marker eu rouge
         var marker =L.marker([station.position.lat, station.position.lng], {icon: redIcon});
         }
         else { //si aucune conditon remplie : rouge
@@ -69,45 +69,85 @@ ajaxGet(urlapi, function (reponse) {
 
   		//Méthode d'insertion des informations dans div infoStation
 
-        displayPanel = function(){
+        displayPanel1 = function(){
         $("#mapid").width("70%"); //changement de la largeur de carte pour 70% de la taille de la page
         $("#infoStation").show(); //affichage div en display none par défault
-        $("#nomStation").html(station.name); //affichage du nom de la station
-        $("#etatStation").html(station.status); //affichage statut open ou close de la station
+        $("#nomStation").html(station_name);
+        $("#adresseStation").html(station.address); //affichage du nom de la station
+        $("#etatStation").html(station_status); //affichage statut open ou close de la station
         $("#veloDispo").html(station.available_bikes); //affichage de nombre de de vélos disponible
         $("#attacheDispo").html(station.available_bike_stands); //affichage du nombre d'attache dispo
 
         };
 
+        displayPanel2 = function(){
+        $("#mapid").hide(); //changement de la largeur de carte pour 70% de la taille de la page
+        $("#infoStation").show(); //affichage div en display none par défault
+        $("#nomStation").html(station_name);
+        $("#etatStation").html(station_status); //affichage statut open ou close de la station
+        $("#veloDispo").html(station.available_bikes); //affichage de nombre de de vélos disponible
+        };
+
+        function resizePage(){
+        var Largeur = $(window).width();
+            if(Largeur < 1024) {
+            marker.on('click', displayPanel2);
+            }else{
+            marker.on('click', displayPanel1); //gestion du click sur le marker pour affichage des informations (via fonction display)
+            }
+}
+$(window).resize(resizePage);
+resizePage(); // Appel de la fonction à l'affichage de la page.
 
 
-marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
+
 
     }); // Fin for Each
 
 mymap.addLayer(markers);
 });
-
+        /*Création fonction "valid" gérant validation formulaire*/
         valid = function () {
             sessionStorage.setItem("nomStation", $("#nomStation").html());
-        
-            var name = $("#Formnom").val();
-            var missPrenom = document.getElementById("missPrenom");
-            if($.trim(name) === ''){
-                missPrenom.textContent = "Prénom manquant";
-                missPrenom.style.color ='red';
+            //déclaration variables reprenant informations nécessaires à la réservation
+            var nom = $("#Formnom").val();
+            var prenom = $("#Formprenom").val();
+            var missNom=$("#missNom");
+            var missPrenom = $("#missPrenom");
+            var saisieValid = false;
 
-                return false;
-            }else{
+            missNom.hide();
+            missPrenom.hide();
+            //gestion condition avec prise en compte espace dans le formulaire ->espace considéré comme form vide
+            if($.trim(nom) === ''){
+            	missNom.show();
+                missNom.text("Nom manquant");
+                missNom.css('color','red');
+
+                
+            }
+            if ($.trim(prenom) === ''){
+                missPrenom.show()
+                missPrenom.text("Prénom manquant");
+                missPrenom.css('color','red');
+
+                
+
+            }
+            else{
+                //si les deux conditions non validées alors le formulaire est ok et la réservation peut se lancer
                 sessionStorage.setItem("Formprenom", $("#Formprenom").val());
                 sessionStorage.setItem("Formnom", $("#Formnom").val());
-                 $('#selectionStation').html("Réservation à la station " 
+               
+                $('#selectionStation').html("Réservation à la station " 
                 + sessionStorage.getItem("nomStation") + " pour " + sessionStorage.getItem("Formprenom") 
                 +" " 
                 + sessionStorage.getItem("Formnom"));
 
-                 return true;
+                 saisieValid = true;
             }
+
+            return saisieValid;
 
         };
 
@@ -131,12 +171,14 @@ $(function() {
                 console.log(sessionStorage.getItem("nomStation"));
             });
 
+
+//gestion pop up pour la réservation. Ouverture au clic de la validation du canvas
   $('#signUp').click(function(){
        $('.hover_bkgr_fricc').show();
     });
-   
+
+  //lancement de la fonction "valid" reprise plus haut 
     $('#valid').click(function(){
-       
        if( valid() ){
             CountDownObj.timer();
             $('.hover_bkgr_fricc').html('<p>Réservation prise en compte !</p>');
@@ -145,8 +187,7 @@ $(function() {
             });
 
        }
-        
-       
+               
     });
 
     $('.popupCloseButton').click(function(){
