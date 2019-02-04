@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" media="screen and (max-width: 480px)" href="./css/phone.css"/>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"/>
@@ -20,48 +21,34 @@
 <blockquote class="blockquote text-center">
   <h1>
 	 LeVélo
-	 <small class="text-muted"> location de vélo à Marseille</small>
+	 <small class="text-muted"> - Marseille</small>
   </h1>
 </blockquote>
 
-<!--navbar-->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Levélo - Marseille</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<!--NAVBAR-->
+  
+  <!-- Navbar content -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #e3f2fd;">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
-
-<!--NAVBAR-->
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">xxxxxx</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Présentation
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-    </ul>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="navbar-text" tabindex="-1"><div ="decompteTimerBar"></div></a>
+    </div>
   </div>
 </nav>
+  
 <!--/NAVBAR-->
 
                     <!--Slider-->
 
 <div span ="slider">
-  <a class="trigger_popup_slider">Découvrez comment réserver en cliquand ici</a>
+  <a div ="explicationResa" class="trigger_popup_slider">Comment réserver ?</a>
   <div class="hover_bkgr_slider">
     <span class="helper_slider"></span>
     <div>
@@ -97,7 +84,14 @@
                   <li>Vélos disponibles : <span id="veloDispo"> <!-- Nombre inséré en Javascript --> </span></li>
                   <li>Points d'attache disponibles : <span id="attacheDispo"> <!-- Nombre inséré en Javascript --> </span></li>
               </ul>
-        <div id="canvasDiv"></div>
+        <!--<div id="canvasDiv"></div>-->
+            <div id="canvas">
+               <canvas class="roundCorners" id="newSignature"
+                style="position: relative; margin: 0; padding: 0; border: 1px solid #c4caac;"></canvas>
+                <script>signatureCapture();</script>
+               
+                <button type="button" onclick="signatureClear()">Clear signature</button>
+            </div>
 <p class="demoToolList"><button type="button" id="clearCanvasSimple" class="btn btn-outline-primary">Annuler</button></p>
 
 
@@ -159,7 +153,7 @@
 	<script type="text/javascript" src="./javascript/slider/slider_obj.js"></script>
 	<script type="text/javascript" src="./javascript/ajax/ajax.js"></script>
 	<script type="text/javascript" src="./javascript/leaflet.js"></script>
-	<script type="text/javascript" src="./javascript/canvasobj.js"></script>
+	<script type="text/javascript" src="./javascript/testcanvas.js"></script>
   <script type="text/javascript" src="./javascript/countdownObj.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     

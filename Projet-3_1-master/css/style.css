@@ -1,13 +1,13 @@
 #mapid 
 { 
-	height : 640px;
+	height : 700px;
 	width: 100%;
-	
-
 }
 
-.slider
+
+#explicationResa
 {
+    text-align : center;
 
 }
 
@@ -18,7 +18,18 @@
     margin-left:1%;
     background-color: #f8f9fa;
     border : 1px solid black;
-    border-radius: 45px;
+    border-radius: 0x;
+    padding-top:2%;
+}
+
+#navbarSupportedContent
+{
+    width : 100%;
+}
+
+#decompteBloc
+{
+    padding-left:80%;
 }
 
 #infoStation > h2
@@ -40,16 +51,16 @@
 
 }
 
-canvas 
+#canvas 
 {
 	border : 1px solid black;
-    width : 70%;
 
 }
 
 #signUp
 {
 	display : none;
+    margin-left:41%;
 }
 
 /*Popup box slider BEGIN*/
@@ -216,4 +227,9 @@ footer > p
     margin-bottom: 5%;
     height: 45px;
 
+}
+
+#formulaire 
+{
+   width : 90%;
 }

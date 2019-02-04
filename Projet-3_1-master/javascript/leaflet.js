@@ -42,7 +42,7 @@ ajaxGet(urlapi, function (reponse) {
 
             var tableau_name = station.name.split("-"); //
           	var station_name = tableau_name[1] ;
-
+          	var station_status = "Fermée";
          //Choix des markers selons statuts des stations et nombres de vélos présents dans la station
 
 
@@ -50,10 +50,10 @@ ajaxGet(urlapi, function (reponse) {
             //condition pour couleur du marker. si nb vélo sup à 5 afichage du markeur en vert
         if (station.available_bikes >= 5) {
         var marker =L.marker([station.position.lat, station.position.lng], {icon: greenIcon});
-         }//idement mais affichage en orange
+        station_status = "Ouvert"} //idement mais affichage en orange
         else if(station.status = "OPEN" && station.available_bikes <= 4 ) {
         var marker =L.marker([station.position.lat, station.position.lng], {icon: orangeIcon});
-        }else if (station.available_bikes === 0) { //si 0 marker eu rouge
+        station_status = "Ouvert"}else if (station.available_bikes === 0) { //si 0 marker eu rouge
         var marker =L.marker([station.position.lat, station.position.lng], {icon: redIcon});
         }
         else { //si aucune conditon remplie : rouge
@@ -69,20 +69,38 @@ ajaxGet(urlapi, function (reponse) {
 
   		//Méthode d'insertion des informations dans div infoStation
 
-        displayPanel = function(){
+        displayPanel1 = function(){
         $("#mapid").width("70%"); //changement de la largeur de carte pour 70% de la taille de la page
         $("#infoStation").show(); //affichage div en display none par défault
-        $("#nomStation").html(station.name);
+        $("#nomStation").html(station_name);
         $("#adresseStation").html(station.address); //affichage du nom de la station
-        $("#etatStation").html(station.status); //affichage statut open ou close de la station
+        $("#etatStation").html(station_status); //affichage statut open ou close de la station
         $("#veloDispo").html(station.available_bikes); //affichage de nombre de de vélos disponible
         $("#attacheDispo").html(station.available_bike_stands); //affichage du nombre d'attache dispo
 
         };
 
+        displayPanel2 = function(){
+        $("#mapid").hide(); //changement de la largeur de carte pour 70% de la taille de la page
+        $("#infoStation").show(); //affichage div en display none par défault
+        $("#nomStation").html(station_name);
+        $("#etatStation").html(station_status); //affichage statut open ou close de la station
+        $("#veloDispo").html(station.available_bikes); //affichage de nombre de de vélos disponible
+        };
+
+        function resizePage(){
+        var Largeur = $(window).width();
+            if(Largeur < 1024) {
+            marker.on('click', displayPanel2);
+            }else{
+            marker.on('click', displayPanel1); //gestion du click sur le marker pour affichage des informations (via fonction display)
+            }
+}
+$(window).resize(resizePage);
+resizePage(); // Appel de la fonction à l'affichage de la page.
 
 
-marker.on('click', displayPanel); //gestion du click sur le marker pour affichage des informations (via fonction display)
+
 
     }); // Fin for Each
 
@@ -96,22 +114,25 @@ mymap.addLayer(markers);
             var prenom = $("#Formprenom").val();
             var missNom=$("#missNom");
             var missPrenom = $("#missPrenom");
+            var saisieValid = false;
+
+            missNom.hide();
+            missPrenom.hide();
             //gestion condition avec prise en compte espace dans le formulaire ->espace considéré comme form vide
-            if($.trim(nom) === ''){
-                missNom.text("Nom manquant");
-                missNom.css('color','red');
+            if($.trim(nom) === '' || $.trim(prenom) === '' ){
 
-                return false;
+            	if($.trim(nom) === ''){
+            		missNom.show();
+                	missNom.text("Nom manquant");
+                	missNom.css('color','red');   
+            	}
+            	if ($.trim(prenom) === ''){
+                	missPrenom.show()
+                	missPrenom.text("Prénom manquant");
+                	missPrenom.css('color','red');
             }
-            if ($.trim(prenom) === ''){
-                missPrenom.text("Prénom manquant");
-                missPrenom.css('color','red');
-
-                return false;
-
-
-            }
-            else{
+           
+        }else{
                 //si les deux conditions non validées alors le formulaire est ok et la réservation peut se lancer
                 sessionStorage.setItem("Formprenom", $("#Formprenom").val());
                 sessionStorage.setItem("Formnom", $("#Formnom").val());
@@ -121,8 +142,11 @@ mymap.addLayer(markers);
                 +" " 
                 + sessionStorage.getItem("Formnom"));
 
-                 return true;
-            }
+                 saisieValid = true;
+            	}
+        	
+
+            return saisieValid;
 
         };
 
